@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ねこメッセージパーク</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <header class="top-bar">
+        <span class="logo">🐾 Neko Park</span>
+        <span class="subtitle">みんなのねこアート広場 ♡</span>
+    </header>
+
+    <main class="layout">
+        <section class="park">
+            <div class="park-heading">
+                <h1>Cat Park ♡</h1>
+                <p>ねこを描いて、みんなとシェアしよう！</p>
+            </div>
+
+            <div id="gallery" class="gallery">
+                <article class="art-card sample">
+                    <div class="sample-cat">ฅ^•ﻌ•^ฅ</div>
+                    <p class="author">miao</p>
+                    <p class="comment">こんにちは！</p>
+                </article>
+
+                <article class="art-card sample">
+                    <div class="sample-cat">ᓚᘏᗢ</div>
+                    <p class="author">kiki</p>
+                    <p class="comment">ねこが大好き ♡</p>
+                </article>
+
+                <article class="art-card sample">
+                    <div class="sample-cat">=^._.^=</div>
+                    <p class="author">mimi</p>
+                    <p class="comment">よろしくね！</p>
+                </article>
+            </div>
+
+            <p class="park-footer">
+                Made with ♡ and paws
+            </p>
+        </section>
+
+        <aside class="panel">
+            <h2>🐱 Draw a Cat</h2>
+            <p class="panel-description">
+                すきな絵を描いてね！
+            </p>
+
+            <div class="canvas-wrap">
+                <canvas id="drawCanvas"
+                        width="320"
+                        height="260"></canvas>
+            </div>
+
+            <div class="tools">
+                <label for="penColor">ペンの色</label>
+                <input type="color" id="penColor" value="#3978d4">
+
+                <label for="penSize">太さ</label>
+                <input type="range" id="penSize"
+                       min="1" max="12" value="4">
+
+                <button id="clearBtn" class="clear-btn">
+                    消す ↺
+                </button>
+            </div>
+
+            <input id="nickname"
+                   class="text-input"
+                   type="text"
+                   maxlength="20"
+                   placeholder="ニックネーム">
+
+            <textarea id="messageInput"
+                      class="text-input"
+                      maxlength="200"
+                      placeholder="メッセージを書いてね ♡"
+                      rows="3"></textarea>
+
+            <button id="sendBtn" class="send-btn">
+                公園に送る ♡
+            </button>
+
+            <p class="note">
+                あなたの作品をみんなに見せよう！
+            </p>
+            <p id="status" class="status"></p>
+        </aside>
+    </main>
+</body>
+</html>

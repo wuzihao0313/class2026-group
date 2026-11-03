@@ -1,277 +1,313 @@
-* {
-    box-sizing: border-box;
-}
-
-body {
-    margin: 0;
-    min-height: 100vh;
-    font-family: "Arial", "Meiryo", sans-serif;
-    color: #45658b;
-    background:
-        radial-gradient(circle at 20% 15%, #ffffff 0 3%, transparent 4%),
-        linear-gradient(135deg, #fffdf4, #eef5ff, #fff0f5);
-}
-
-.top-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px 30px;
-    background: rgba(255, 255, 255, 0.8);
-    border-bottom: 2px dashed #c9dafa;
-}
-
-.logo {
-    font-size: 23px;
-    font-weight: bold;
-    color: #3978d4;
-}
-
-.subtitle {
-    font-size: 13px;
-}
-
-.layout {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 310px;
-    gap: 24px;
-    max-width: 1200px;
-    margin: 28px auto;
-    padding: 0 20px;
-    align-items: start;
-}
-
-.park {
-    min-height: 600px;
-    padding: 25px;
-    border-radius: 24px;
-    background: rgba(255, 255, 255, 0.58);
-    border: 2px solid white;
-}
-
-.park-heading {
-    text-align: center;
-    margin-bottom: 25px;
-}
-
-.park-heading h1 {
-    margin: 0;
-    color: #3978d4;
-    font-size: 36px;
-}
-
-.park-heading p {
-    color: #8398b4;
-    font-size: 14px;
-}
-
-.gallery {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 16px;
-}
-
-.art-card {
-    min-width: 0;
-    padding: 10px;
-    text-align: center;
-    background: #fff;
-    border: 1px solid #dce8fb;
-    border-radius: 16px;
-    box-shadow: 0 4px 12px #b5c9e51c;
-    overflow-wrap: anywhere;
-}
-
-.sample-cat {
-    height: 105px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #3978d4;
-    font-size: 36px;
-    background: #f8fbff;
-    border-radius: 10px;
-}
-
-.art-card canvas {
-    display: block;
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-    background: white;
-}
-
-.author {
-    margin: 10px 0 4px;
-    font-weight: bold;
-    color: #3978d4;
-}
-
-.comment {
-    margin: 4px 0;
-    font-size: 13px;
-    color: #7388a3;
-    white-space: pre-wrap;
-    overflow-wrap: anywhere;
-}
-
-.park-footer {
-    margin-top: 35px;
-    text-align: center;
-    color: #9aacc3;
-    font-size: 12px;
-}
-
-.panel {
-    position: sticky;
-    top: 20px;
-    padding: 20px;
-    background: rgba(255, 255, 255, 0.92);
-    border: 2px solid white;
-    border-radius: 22px;
-    box-shadow: 0 8px 25px #b7c9e54d;
-}
-
-.panel h2 {
-    margin: 0;
-    color: #3978d4;
-    font-size: 21px;
-}
-
-.panel-description,
-.note {
-    color: #8b9bb1;
-    font-size: 12px;
-}
-
-.canvas-wrap {
-    margin: 15px 0;
-    border: 2px solid #dce8fb;
-    border-radius: 12px;
-    overflow: hidden;
-    background: white;
-}
-
-#drawCanvas {
-    display: block;
-    width: 100%;
-    height: auto;
-    cursor: crosshair;
-    touch-action: none;
-}
-
-.tools {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 15px;
-    font-size: 12px;
-}
-
-#penColor {
-    width: 32px;
-    height: 28px;
-    border: none;
-    background: transparent;
-    cursor: pointer;
-}
-
-#penSize {
-    width: 65px;
-    accent-color: #3978d4;
-    cursor: pointer;
-}
-
-button {
-    font-family: inherit;
-    cursor: pointer;
-    transition: transform 0.15s, opacity 0.15s;
-}
-
-button:hover {
-    transform: translateY(-2px);
-}
-
-.clear-btn {
-    padding: 7px 10px;
-    color: #6684ad;
-    background: #edf4ff;
-    border: 1px solid #dce8fb;
-    border-radius: 9px;
-}
-
-.text-input {
-    display: block;
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    color: #45658b;
-    font: inherit;
-    font-size: 13px;
-    background: white;
-    border: 1.5px solid #d8e2ef;
-    border-radius: 10px;
-    outline: none;
-}
-
-.text-input:focus {
-    border-color: #7ca8ed;
-    box-shadow: 0 0 0 3px #eaf2ff;
-}
-
-textarea {
-    resize: vertical;
-}
-
-.send-btn {
-    width: 100%;
-    padding: 12px;
-    color: white;
-    font-size: 14px;
-    font-weight: bold;
-    background: linear-gradient(135deg, #76a9f5, #6489e5);
-    border: none;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px #7da7e544;
-}
-
-.send-btn:hover {
-    opacity: 0.9;
-}
-
-.status {
-    font-size: 12px;
-    color: #3978d4;
-    text-align: center;
-    overflow-wrap: anywhere;
-}
-
-@media (max-width: 760px) {
-    .layout {
-        grid-template-columns: 1fr;
-        margin-top: 15px;
-    }
-
-    .panel {
-        position: static;
-        grid-row: 1;
-    }
-
-    .gallery {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .top-bar {
-        padding: 14px;
-    }
-
-    .subtitle {
-        max-width: 130px;
-        text-align: right;
-    }
-
-    .park {
-        padding: 15px;
-    }
-}
+/* ==================== 1. 基本リセットと新しいカラーテーマ ==================== */
+        :root {
+            /* デフォルト：システムミニマル */
+            --bg-main: #f2f4f8; --bg-card: #ffffff; --accent-color: #2c3e50;
+            --text-main: #1a1a1a; --text-sub: #7f8fa6; --border-light: #e6e9ed;
+            --shadow-card: 0 8px 24px rgba(0,0,0,0.04); --nav-bg: rgba(255, 255, 255, 0.95);
+        }
+ 
+ 
+        /* 1. Saturn 土星の暖かな茶 */
+        .theme-saturn { --bg-main: #FDF9D9; --bg-card: #ffffff; --accent-color: #A4744B; --text-main: #5a3f22; --text-sub: #8e785a; --border-light: #F0E6CA; --shadow-card: 0 8px 24px rgba(164, 116, 75, 0.15); }
+        /* 2. Matcha さわやかな緑 */
+        .theme-matcha { --bg-main: #ECF4BA; --bg-card: #ffffff; --accent-color: #B1DB73; --text-main: #2d4222; --text-sub: #6b8a54; --border-light: #D9EDB5; --shadow-card: 0 8px 24px rgba(177, 219, 115, 0.2); }
+        /* 3. Strawberry Milk いちごミルク */
+        .theme-strawberry { --bg-main: #FFF3E8; --bg-card: #ffffff; --accent-color: #F29DB0; --text-main: #4e2c35; --text-sub: #ba8a90; --border-light: #FCE0E5; --shadow-card: 0 8px 24px rgba(242, 157, 176, 0.2); }
+        /* 4. Macaron マカロンガール */
+        .theme-macaron { --bg-main: #DFE3E2; --bg-card: #ffffff; --accent-color: #F8CCDB; --text-main: #333333; --text-sub: #7a7a7a; --border-light: #CDD0CF; --shadow-card: 0 8px 24px rgba(248, 204, 219, 0.3); }
+        /* 5. Cool Summer さわやかな夏 */
+        .theme-coolsummer { --bg-main: #BDF5F2; --bg-card: #ffffff; --accent-color: #FDC5FF; --text-main: #1e4554; --text-sub: #61a0b5; --border-light: #A1E8E4; --shadow-card: 0 8px 24px rgba(253, 197, 255, 0.2); }
+        /* 6. Cool Summer Deep 深い夏 */
+        .theme-coolsdeep { --bg-main: #D0FFED; --bg-card: #ffffff; --accent-color: #FFD4FF; --text-main: #1a404b; --text-sub: #5d949f; --border-light: #9FE3D3; --shadow-card: 0 8px 24px rgba(255, 212, 255, 0.2); }
+        /* 7. Dreamland 夢の世界 */
+        .theme-dream { --bg-main: #FFF6DE; --bg-card: #ffffff; --accent-color: #B8AAC8; --text-main: #443a5e; --text-sub: #9889b0; --border-light: #EEE5D7; --shadow-card: 0 8px 24px rgba(184, 170, 200, 0.2); }
+        /* 8. Salt Blue 塩系ブルー */
+        .theme-salt { --bg-main: #A9E2FC; --bg-card: #ffffff; --accent-color: #16BBF1; --text-main: #083b61; --text-sub: #4a80a5; --border-light: #8CD6FA; --shadow-card: 0 8px 24px rgba(22, 187, 241, 0.2); }
+        /* 9. Baby Blue ベビーブルー */
+        .theme-baby { --bg-main: #F4FBFE; --bg-card: #ffffff; --accent-color: #A9D0F5; --text-main: #18394d; --text-sub: #5e83a0; --border-light: #CAE4F9; --shadow-card: 0 8px 24px rgba(169, 208, 245, 0.2); }
+ 
+ 
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background-color: var(--bg-main); color: var(--text-main);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            display: flex; justify-content: center; min-height: 100vh; padding: 0; margin: 0;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .app-container {
+            width: 100%; max-width: 1100px; background: var(--bg-card);
+            box-shadow: none; padding: 15px 20px 80px 20px; min-height: 100vh;
+            display: flex; flex-direction: column; transition: all 0.3s ease;
+        }
+        @media (min-width: 800px) {
+            body { padding: 30px; }
+            .app-container { border-radius: 24px; box-shadow: var(--shadow-card); min-height: 85vh; padding: 25px 30px; }
+        }
+        ::-webkit-scrollbar { width: 6px; } 
+        ::-webkit-scrollbar-thumb { background: var(--border-light); border-radius: 10px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+ 
+ 
+        /* ==================== 2. 公共组件 ==================== */
+        .bottom-nav {
+            position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%);
+            background: var(--nav-bg); backdrop-filter: blur(10px);
+            padding: 10px 15px; border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid var(--border-light);
+            display: flex; gap: 10px; z-index: 50; white-space: nowrap;
+        }
+        .nav-item {
+            display: flex; align-items: center; gap: 6px; padding: 6px 16px; border-radius: 20px; cursor: pointer;
+            color: var(--text-sub); font-size: 14px; font-weight: 500; transition: 0.2s;
+        }
+        .nav-item.active { background: var(--accent-color); color: white; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        
+        /* 独立主题按钮 */
+        .theme-nav-btn {
+            border-left: 1px solid var(--border-light);
+            padding-left: 10px;
+            color: var(--text-sub);
+            cursor: pointer;
+            display: flex; gap: 4px; align-items: center;
+        }
+ 
+ 
+        .view-page { display: none; animation: fadeIn 0.3s ease; }
+        .view-page.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0.4; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+ 
+ 
+        /* ==================== 3. 视图1：手账界面 ==================== */
+        .planner-layout { display: flex; flex-direction: column; gap: 25px; height: 100%; }
+        @media (min-width: 700px) { .planner-layout { display: grid; grid-template-columns: 260px 1fr; } }
+ 
+ 
+        .sidebar-container { display: flex; flex-direction: column; border-right: 1px solid var(--border-light); padding-right: 15px; height: 100%;}
+        .header-planner { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        
+        .clock-large { display: flex; flex-direction: column; align-items: flex-start; line-height: 1; }
+        .clock-hm { font-size: 42px; font-weight: 700; letter-spacing: -1px; color: var(--accent-color); }
+ 
+ 
+        .header-planner .date-box { display: flex; flex-direction: column; align-items: flex-end; }
+        .date-box .day { font-size: 18px; font-weight: 600; cursor: pointer; }
+        .date-box .week { font-size: 12px; color: var(--text-sub); background: var(--bg-main); padding: 2px 10px; border-radius: 12px; margin-top: 2px; }
+ 
+ 
+        .month-scroll-wrapper { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 8px; margin-bottom: 12px; scrollbar-width: none; }
+        .month-scroll-wrapper::-webkit-scrollbar { display: none; }
+        .month-pill {
+            flex-shrink: 0; padding: 5px 12px; font-size: 13px; border-radius: 16px; background: var(--bg-main);
+            color: var(--text-sub); cursor: pointer; transition: 0.2s; border: 1px solid transparent;
+        }
+        .month-pill.active { background: var(--accent-color); color: white; border-color: var(--accent-color); }
+        .month-pill:hover:not(.active) { background: var(--border-light); }
+ 
+ 
+        .sidebar-days { flex: 1; overflow-y: auto; max-height: calc(100vh - 350px); padding-right: 5px; }
+        .day-card {
+            padding: 10px 12px; border-radius: 10px; margin-bottom: 10px; cursor: pointer;
+            border: 1px solid transparent; transition: 0.2s;
+        }
+        .day-card:hover { background: var(--bg-main); }
+        .day-card.active { background: var(--bg-main); border-color: var(--accent-color); }
+        .day-card .date { font-weight: 600; font-size: 14px; color: var(--text-main); }
+        .day-card .week { font-size: 12px; color: var(--text-sub); }
+        .day-card .preview-todo { font-size: 12px; color: var(--text-sub); margin-top: 4px; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
+ 
+ 
+        /* ==================== 4. 右侧：笔记与清单 ==================== */
+        .journal-container {
+            display: flex; flex-direction: column; height: 100%; min-height: 500px; 
+            overflow-y: auto; padding-right: 5px; gap: 20px;
+        }
+ 
+ 
+        .note-header { border-bottom: 1px solid var(--border-light); padding-bottom: 8px; margin-bottom: 10px; }
+        .note-title-input { font-size: 22px; font-weight: 600; border: none; background: transparent; outline: none; color: var(--text-main); width: 100%; }
+        .note-title-input::placeholder { color: #ccc; }
+        .note-date-sub { font-size: 13px; color: var(--text-sub); display: block; margin-top: 5px; }
+ 
+ 
+        .note-area { display: flex; flex-direction: column; flex-shrink: 0; }
+        .note-textarea {
+            width: 100%; min-height: 100px; border: none; background: transparent; resize: vertical; outline: none;
+            font-size: 15px; line-height: 1.8; color: var(--text-main); padding: 0; margin-bottom: 15px;
+        }
+        .note-textarea::placeholder { color: #ccc; font-style: italic; }
+        
+        .img-embedded {
+            width: calc(33.33% - 8px); aspect-ratio: 1 / 1; object-fit: cover;
+            border-radius: 8px; margin: 0 4px 8px 0; cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02); border: 1px solid var(--border-light);
+            transition: 0.2s; position: relative;
+        }
+        .img-embedded:hover { transform: scale(1.02); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+ 
+ 
+        .toolbar-area { display: flex; gap: 10px; padding-top: 12px; border-top: 1px dashed var(--border-light); margin-top: 10px; }
+        .btn-add-img { background: transparent; border: 1px dashed var(--border-light); padding: 6px 14px; border-radius: 16px; cursor: pointer; font-size: 13px; color: var(--text-sub); transition: 0.2s; }
+        .btn-add-img:hover { border-color: var(--accent-color); color: var(--accent-color); background: var(--bg-main); }
+ 
+ 
+        .todo-area { border-top: 1px solid var(--border-light); padding-top: 15px; }
+        .todo-area-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .todo-area-header h3 { font-size: 16px; font-weight: 600; }
+        .todo-list { list-style: none; }
+        .todo-item-wrap { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border-light); cursor: pointer; transition: 0.2s; }
+        .todo-item-wrap:hover { background: var(--bg-main); margin: 0 -10px; padding: 10px 10px; border-radius: 8px; }
+        .todo-check-box { width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--border-light); display: flex; justify-content: center; align-items: center; color: transparent; transition: 0.2s; flex-shrink: 0;}
+        .todo-item-wrap.done .todo-check-box { background: var(--accent-color); border-color: var(--accent-color); color: white; }
+        .todo-item-wrap.done .todo-text { text-decoration: line-through; opacity: 0.6; }
+        .todo-text { flex: 1; color: var(--text-main); }
+        
+        .add-todo-row { display: flex; gap: 10px; margin-top: 15px; }
+        .add-todo-row input { flex: 1; padding: 12px; border: 1px solid var(--border-light); border-radius: 10px; background: var(--bg-main); outline: none; color: var(--text-main); }
+        .add-todo-row button { padding: 0 20px; background: var(--accent-color); color: white; border: none; border-radius: 10px; cursor: pointer; }
+ 
+ 
+        /* 图片放大镜 */
+        .lightbox-overlay { position: fixed; top:0; left:0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.85); z-index: 9999; display: none; justify-content: center; align-items: center; cursor: pointer; }
+        .lightbox-overlay.open { display: flex; }
+        .lightbox-img { max-width: 90%; max-height: 90%; border-radius: 8px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+ 
+ 
+        /* ==================== 5. 视图2：日历界面 ==================== */
+        .calendar-container { display: flex; flex-direction: column; gap: 20px; padding-top: 10px; }
+        .cal-header { display: flex; justify-content: space-between; align-items: center; }
+        .cal-header-ctrl { display: flex; align-items: center; gap: 15px; }
+        .cal-nav-btn { background: none; border: 1px solid var(--border-light); width: 30px; height: 30px; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; color: var(--text-sub); transition: 0.2s;}
+        .cal-nav-btn:hover { border-color: var(--accent-color); color: var(--accent-color); }
+        .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; text-align: center; }
+        .cal-head { font-size: 13px; color: var(--text-sub); padding-bottom: 10px; font-weight: 500;}
+        .cal-day { padding: 12px 0; border-radius: 50%; cursor: pointer; transition: 0.2s; font-size: 15px; position: relative; color: var(--text-main); }
+        .cal-day:hover { background: var(--bg-main); }
+        .cal-day.other { color: #ccc; }
+        
+        .cal-day.today { background: var(--accent-color); color: white; }
+        .cal-day.marked { position: relative; font-weight: 600; }
+        .cal-day.marked::after {
+            content: attr(data-mark-label);
+            position: absolute; bottom: -18px; left: 50%; transform: translateX(-50%);
+            font-size: 9px; color: var(--accent-color); white-space: nowrap; background: var(--bg-main);
+            padding: 0 4px; border-radius: 4px;
+        }
+ 
+ 
+        .cal-footer { display: grid; grid-template-columns: 1fr; gap: 25px; margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border-light); }
+        @media (min-width: 600px) { .cal-footer { grid-template-columns: 1fr 1fr; } }
+        .cal-section h4 { font-size: 14px; font-weight: 600; margin-bottom: 12px; color: var(--text-main); }
+        
+        .cal-todo-item { display: flex; align-items: center; gap: 10px; padding: 6px 0; border-bottom: 1px dashed var(--border-light); cursor: pointer; position: relative;}
+        .cal-todo-item.done .cal-todo-text { text-decoration: line-through; opacity: 0.5; }
+        .cal-todo-check { width: 16px; height: 16px; border: 2px solid var(--border-light); border-radius: 50%; display: flex; justify-content: center; align-items: center; color: transparent; font-size: 10px; flex-shrink: 0; }
+        .cal-todo-item.done .cal-todo-check { background: var(--accent-color); border-color: var(--accent-color); color: white; }
+        .cal-todo-text { flex: 1; font-size: 14px; }
+        
+        .cal-todo-input-area { display: flex; gap: 5px; margin-bottom: 10px; }
+        .cal-todo-input { flex: 1; padding: 8px 12px; border: 1px solid var(--border-light); border-radius: 20px; outline: none; background: var(--bg-main); color: var(--text-main); font-size: 13px; }
+        .cal-todo-input::placeholder { color: #aaa; }
+ 
+ 
+        /* ==================== 6. 弹窗与抽屉 ==================== */
+        .overlay-modal { position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.4); z-index: 1000; display: none; opacity: 0; transition: 0.2s; align-items: center; justify-content: center; }
+        .overlay-modal.open { display: flex; opacity: 1; }
+        .modal-box { background: var(--bg-card); padding: 25px; border-radius: 16px; width: 85%; max-width: 320px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .modal-box h3 { margin-bottom: 15px; font-size: 18px; }
+        .modal-btns { display: flex; gap: 10px; margin-top: 15px; }
+        .modal-btns button { flex: 1; padding: 10px; border-radius: 8px; border: none; cursor: pointer; }
+        .btn-confirm { background: var(--accent-color); color: white; }
+        .btn-cancel { background: var(--bg-main); color: var(--text-main); }
+        
+        #fileInput { display: none; }
+        
+        /* 主题抽屉 (整合教程入口) */
+        .theme-drawer { position: fixed; top:0; right:0; width: 300px; height: 100vh; background: var(--bg-card); box-shadow: -4px 0 20px rgba(0,0,0,0.05); transform: translateX(100%); transition: 0.3s ease; z-index: 2000; padding: 30px 20px; overflow-y: auto; }
+        .theme-drawer.open { transform: translateX(0); }
+        .theme-drawer-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .theme-opt { display: flex; align-items: center; gap: 15px; padding: 12px; border-radius: 10px; cursor: pointer; margin-bottom: 8px; transition: 0.2s; }
+        .theme-opt:hover { background: var(--bg-main); }
+        .theme-circle { width: 24px; height: 24px; border-radius: 50%; border: 1px solid var(--border-light); flex-shrink: 0; }
+ 
+ 
+        /* 主题里的教程入口 */
+        .tutorial-in-drawer {
+            margin-bottom: 20px; padding: 12px; background: var(--bg-main); 
+            border-radius: 10px; cursor: pointer; color: var(--text-main);
+            display: flex; align-items: center; gap: 10px; font-weight: 500;
+            transition: 0.2s;
+        }
+        .tutorial-in-drawer:hover { background: var(--border-light); }
+ 
+ 
+        /* 新手教程 (全局压暗高亮) */
+        #tutorialOverlay {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(0, 0, 0, 0.75); z-index: 9998;
+            display: none; justify-content: center; align-items: center;
+            backdrop-filter: blur(2px);
+        }
+        #tutorialOverlay.open { display: flex; }
+ 
+ 
+        .tutorial-card {
+            background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(4px);
+            max-width: 480px; width: 85%; padding: 25px;
+            border-radius: 24px; box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            position: relative; text-align: left;
+            transform: translateY(20px); transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        #tutorialOverlay.open .tutorial-card { transform: translateY(0); }
+        
+        .tutorial-title { font-size: 22px; font-weight: 600; margin-bottom: 15px; color: #111; display: flex; align-items: center; gap: 10px; }
+        .tutorial-step-box { 
+            background: #f8f9fa; border-radius: 12px; padding: 15px; 
+            border-left: 4px solid var(--accent-color); margin-bottom: 15px;
+            font-size: 14px; line-height: 1.6; color: #333;
+        }
+        .tutorial-step-box strong { display: block; margin-bottom: 4px; font-size: 15px; color: #000;}
+        .tutorial-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 10px; }
+        .btn-skip { background: transparent; border: none; padding: 10px 15px; color: #888; cursor: pointer; font-size: 14px; }
+        .btn-start { background: var(--accent-color); color: white; border: none; padding: 10px 25px; border-radius: 20px; cursor: pointer; font-size: 14px; font-weight: 500;}
+ 
+ 
+        /* オープニングアニメーション */
+        .splash-overlay {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: #0a0a0a; z-index: 99999;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            opacity: 1; transition: opacity 0.8s ease;
+        }
+        .splash-overlay.hidden { opacity: 0; pointer-events: none; }
+        .splash-logo { color: #fff; font-size: 48px; font-weight: 200; letter-spacing: 6px; margin-bottom: 15px; font-family: Georgia, serif;}
+        .splash-sub { color: #666; font-size: 14px; letter-spacing: 2px; }
+ 
+ 
+ 
+/* Styles for calendar content generated by JavaScript. */
+.calendar-mark-item { display: flex; align-items: center; gap: 8px; padding: 4px 0; }
+ 
+ 
+/* Styles moved from HTML style attributes. */
+.calendar-mark-list { font-size:14px;color:var(--text-sub); }
+.monthly-todo-add { padding:0 15px; border:none; border-radius:20px; background:var(--accent-color); color:white; cursor:pointer; }
+.theme-nav-label { font-size:12px; }
+.date-picker-fields { display:flex; gap:10px; margin-bottom:15px; }
+.date-picker-select { flex:1; padding:8px; border:1px solid var(--border-light); border-radius:8px; }
+.date-picker-day { width:100%; padding:10px; border:1px solid var(--border-light); border-radius:8px; margin-bottom:15px; }
+.mark-description { color:var(--text-sub); margin-bottom:10px; font-size:13px; }
+.mark-input { width:100%; padding:10px; border:1px solid var(--border-light); border-radius:8px; margin-bottom:15px; background:var(--bg-main); }
+.delete-confirm-message { color:var(--text-sub); margin-bottom:15px; font-size:15px; }
+.delete-confirm-button { background:#e74c3c; }
+.tutorial-hint { font-size:12px; color:#888; }
+.theme-drawer-close { background:none; border:none; font-size:20px; cursor:pointer; color:var(--text-sub); }
+.theme-swatch-system { background:#f2f4f8; border:1px solid #333; }
+.theme-swatch-saturn { background:#A4744B; }
+.theme-swatch-matcha { background:#B1DB73; }
+.theme-swatch-strawberry { background:#F29DB0; }
+.theme-swatch-macaron { background:#F8CCDB; }
+.theme-swatch-coolsummer { background:#FDC5FF; }
+.theme-swatch-coolsdeep { background:#FFD4FF; }
+.theme-swatch-dream { background:#B8AAC8; }
+.theme-swatch-salt { background:#16BBF1; }
+.theme-swatch-baby { background:#A9D0F5; }

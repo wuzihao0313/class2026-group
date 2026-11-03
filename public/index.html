@@ -2,96 +2,173 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ねこメッセージパーク</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=no">
+    <title>My Planner · 手帳</title>
+    <link rel="stylesheet" href="lumi.css">
 </head>
-
 <body>
-    <header class="top-bar">
-        <span class="logo">🐾 Neko Park</span>
-        <span class="subtitle">みんなのねこアート広場 ♡</span>
-    </header>
-
-    <main class="layout">
-        <section class="park">
-            <div class="park-heading">
-                <h1>Cat Park ♡</h1>
-                <p>ねこを描いて、みんなとシェアしよう！</p>
+<div class="splash-overlay" id="splashScreen">
+    <div class="splash-logo">Planner</div>
+    <div class="splash-sub">記録 · 計画 · 毎日</div>
+</div>
+<div class="app-container">
+    <div class="view-page active" id="view-planner">
+        <div class="planner-layout">
+            <div class="sidebar-container">
+                <div class="header-planner">
+                    <div class="clock-large">
+                        <span class="clock-hm" id="liveClockHM"></span>
+                    </div>
+                    <div class="date-box" data-action="open-date-picker">
+                        <span class="day" id="sideDate"></span>
+                        <span class="week" id="sideWeek"></span>
+                    </div>
+                </div>
+                <div class="month-scroll-wrapper" id="monthScroll"></div>
+                <div class="sidebar-days" id="weekList"></div>
             </div>
-
-            <div id="gallery" class="gallery">
-                <article class="art-card sample">
-                    <div class="sample-cat">ฅ^•ﻌ•^ฅ</div>
-                    <p class="author">miao</p>
-                    <p class="comment">こんにちは！</p>
-                </article>
-
-                <article class="art-card sample">
-                    <div class="sample-cat">ᓚᘏᗢ</div>
-                    <p class="author">kiki</p>
-                    <p class="comment">ねこが大好き ♡</p>
-                </article>
-
-                <article class="art-card sample">
-                    <div class="sample-cat">=^._.^=</div>
-                    <p class="author">mimi</p>
-                    <p class="comment">よろしくね！</p>
-                </article>
+            <div class="journal-container">
+                <div class="note-area">
+                    <div class="note-header">
+                        <input class="note-title-input" id="noteTitleInput" type="text" placeholder="今日のタイトル...">
+                        <span class="note-date-sub" id="noteSubtitle"></span>
+                    </div>
+                    <textarea class="note-textarea" id="noteInput" placeholder="今日の気分を書いてみましょう..."></textarea>
+                    <div id="imagesContainer"></div>
+                    <div class="toolbar-area">
+                        <button class="btn-add-img" data-action="select-image">+ ノートに画像を挿入</button>
+                        <input type="file" id="fileInput" accept="image/*" multiple>
+                    </div>
+                </div>
+                <div class="todo-area">
+                    <div class="todo-area-header">
+                        <h3>📋 今日のタスク</h3>
+                    </div>
+                    <ul id="todoExpandedList" class="todo-list"></ul>
+                    <div class="add-todo-row">
+                        <input type="text" id="newTodoExpInput" placeholder="タスクを追加...">
+                        <button data-action="add-daily-todo">追加</button>
+                    </div>
+                </div>
             </div>
-
-            <p class="park-footer">
-                Made with ♡ and paws
-            </p>
-        </section>
-
-        <aside class="panel">
-            <h2>🐱 Draw a Cat</h2>
-            <p class="panel-description">
-                すきな絵を描いてね！
-            </p>
-
-            <div class="canvas-wrap">
-                <canvas id="drawCanvas"
-                        width="320"
-                        height="260"></canvas>
+        </div>
+    </div>
+    <div class="view-page" id="view-calendar">
+        <div class="calendar-container">
+            <div class="cal-header">
+                <div class="cal-header-ctrl">
+                    <button class="cal-nav-btn" data-month-change="-1">‹</button>
+                    <h3 id="calTitle">2026年7月</h3>
+                    <button class="cal-nav-btn" data-month-change="1">›</button>
+                </div>
             </div>
-
-            <div class="tools">
-                <label for="penColor">ペンの色</label>
-                <input type="color" id="penColor" value="#3978d4">
-
-                <label for="penSize">太さ</label>
-                <input type="range" id="penSize"
-                       min="1" max="12" value="4">
-
-                <button id="clearBtn" class="clear-btn">
-                    消す ↺
-                </button>
+            <div class="cal-grid" id="calGrid">
+                <div class="cal-head">日</div><div class="cal-head">月</div><div class="cal-head">火</div>
+                <div class="cal-head">水</div><div class="cal-head">木</div><div class="cal-head">金</div><div class="cal-head">土</div>
             </div>
-
-            <input id="nickname"
-                   class="text-input"
-                   type="text"
-                   maxlength="20"
-                   placeholder="ニックネーム">
-
-            <textarea id="messageInput"
-                      class="text-input"
-                      maxlength="200"
-                      placeholder="メッセージを書いてね ♡"
-                      rows="3"></textarea>
-
-            <button id="sendBtn" class="send-btn">
-                公園に送る ♡
-            </button>
-
-            <p class="note">
-                あなたの作品をみんなに見せよう！
-            </p>
-            <p id="status" class="status"></p>
-        </aside>
-    </main>
+            <div class="cal-footer">
+                <div class="cal-section">
+                    <h4>今月の特別な日</h4>
+                    <div id="calMarkList" class="calendar-mark-list"></div>
+                </div>
+                <div class="cal-section">
+                    <h4>月間大リスト</h4>
+                    <div class="cal-todo-input-area">
+                        <input class="cal-todo-input" id="monthlyTodoInput" placeholder="月間目標を入力...">
+                        <button data-action="add-monthly-todo" class="monthly-todo-add">+</button>
+                    </div>
+                    <div id="monthlyTodoList"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bottom-nav">
+        <div class="nav-item active" data-view="planner">📖 手帳</div>
+        <div class="nav-item" data-view="calendar">📅 カレンダー</div>
+        <div class="theme-nav-btn" data-action="open-theme-drawer">
+            <span>🎨</span> <span class="theme-nav-label">テーマ</span>
+        </div>
+    </div>
+    <div class="lightbox-overlay" id="lightbox" data-action="close-lightbox">
+        <img class="lightbox-img" id="lightboxImg" src="">
+    </div>
+    <div class="overlay-modal" id="datePickerModal" data-backdrop-action="close-date-picker">
+        <div class="modal-box">
+            <h3>日付を選択</h3>
+            <div class="date-picker-fields">
+                <select id="jumpYear" class="date-picker-select"></select>
+                <select id="jumpMonth" class="date-picker-select"></select>
+            </div>
+            <input type="number" id="jumpDay" placeholder="日 (1-31)" class="date-picker-day">
+            <div class="modal-btns">
+                <button class="btn-cancel" data-action="close-date-picker">キャンセル</button>
+                <button class="btn-confirm" data-action="apply-jump-date">移動</button>
+            </div>
+        </div>
+    </div>
+    <div class="overlay-modal" id="markModal" data-backdrop-action="close-mark-modal">
+        <div class="modal-box">
+            <h3 id="markTitle">特別な日を追加</h3>
+            <p class="mark-description">記念日や誕生日の名前を入力すると、日付の下に表示されます</p>
+            <input type="text" id="markInput" placeholder="例：誕生日、記念日" class="mark-input">
+            <div class="modal-btns">
+                <button class="btn-cancel" data-action="close-mark-modal">キャンセル</button>
+                <button class="btn-confirm" data-action="confirm-mark">記録</button>
+            </div>
+        </div>
+    </div>
+    <div class="overlay-modal" id="deleteConfirmModal" data-backdrop-action="close-delete-modal">
+        <div class="modal-box">
+            <h3>削除確認</h3>
+            <p id="deleteTextPlaceholder" class="delete-confirm-message">この項目を削除してもよろしいですか？</p>
+            <div class="modal-btns">
+                <button class="btn-cancel" data-action="close-delete-modal">キャンセル</button>
+                <button class="btn-confirm delete-confirm-button" data-action="execute-delete">削除</button>
+            </div>
+        </div>
+    </div>
+    <div class="overlay-modal" id="tutorialOverlay" data-backdrop-action="close-tutorial">
+        <div class="tutorial-card">
+            <div class="tutorial-title">👋 Planner をご利用いただきありがとうございます</div>
+            <div class="tutorial-step-box">
+                <strong>📖 ノートとリスト</strong>
+                左側で月を切り替え、日付をタップして切り替えます。右側上部で日記やイラストを書き、下部で今日のタスクを管理します。<br>
+                <span class="tutorial-hint">ヒント：画像やタスク項目を長押しすると削除できます。</span>
+            </div>
+            <div class="tutorial-step-box">
+                <strong>📅 カレンダーと特別な日</strong>
+                「カレンダー」ビューに切り替え、日付の数字を長押しすると「誕生日/記念日」タグをすばやく追加できます。
+            </div>
+            <div class="tutorial-step-box">
+                <strong>🎨 テーマをカスタマイズ</strong>
+                下部ナビゲーションの「🎨 テーマ」をタップして、いつでも外観を切り替えられます。
+            </div>
+            <div class="tutorial-actions">
+                <button class="btn-skip" data-action="close-tutorial">今後表示しない</button>
+                <button class="btn-start" data-action="close-tutorial">了解しました、始めましょう</button>
+            </div>
+        </div>
+    </div>
+    <div class="theme-drawer" id="themeDrawer">
+        <div class="theme-drawer-header">
+            <h3>🎨 テーマ切り替え</h3>
+            <button data-action="close-theme-drawer" class="theme-drawer-close">✕</button>
+        </div>
+        <div class="tutorial-in-drawer" data-action="open-tutorial-from-theme">
+            <span>❓</span> 初心者ガイド（再表示）
+        </div>
+        <div class="theme-opt" data-theme=""><div class="theme-circle theme-swatch-system"></div> System システムミニマル</div>
+        <div class="theme-opt" data-theme="theme-saturn"><div class="theme-circle theme-swatch-saturn"></div> Saturn 土星の暖かい茶</div>
+        <div class="theme-opt" data-theme="theme-matcha"><div class="theme-circle theme-swatch-matcha"></div> Matcha さわやかな緑</div>
+        <div class="theme-opt" data-theme="theme-strawberry"><div class="theme-circle theme-swatch-strawberry"></div> Strawberry いちごミルク</div>
+        <div class="theme-opt" data-theme="theme-macaron"><div class="theme-circle theme-swatch-macaron"></div> Macaron マカロン</div>
+        <div class="theme-opt" data-theme="theme-coolsummer"><div class="theme-circle theme-swatch-coolsummer"></div> Cool Summer さわやかな夏</div>
+        <div class="theme-opt" data-theme="theme-coolsdeep"><div class="theme-circle theme-swatch-coolsdeep"></div> Cool Deep 深い夏</div>
+        <div class="theme-opt" data-theme="theme-dream"><div class="theme-circle theme-swatch-dream"></div> Dream 夢の世界</div>
+        <div class="theme-opt" data-theme="theme-salt"><div class="theme-circle theme-swatch-salt"></div> Salt 塩系ブルー</div>
+        <div class="theme-opt" data-theme="theme-baby"><div class="theme-circle theme-swatch-baby"></div> Baby ベビーブルー</div>
+    </div>
+</div>
+<script src="jove.js"></script>
 </body>
 </html>
